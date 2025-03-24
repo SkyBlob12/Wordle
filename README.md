@@ -35,7 +35,7 @@ Pour installer et exécuter le jeu Wordle localement, suivez ces étapes :
     ```
 2. Accédez au répertoire du projet :
     ```bash
-    cd src
+    cd Wordle
     ```
 3. Installez les dépendances :
     ```bash
@@ -43,6 +43,7 @@ Pour installer et exécuter le jeu Wordle localement, suivez ces étapes :
     ```
 4. Démarrez le jeu :
     ```bash
+    cd src
     node index.js
     ```
 
