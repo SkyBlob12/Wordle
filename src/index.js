@@ -9,6 +9,10 @@ const rl = readline.createInterface({
 
 let game;
 
+// Liste de mots disponibles pour le jeu
+const availableWords = [
+    "chien", "plage", "fleur", "arbre", "piano","louve", "merle", "bison", "lire", "vache"];  
+
 // Fonction pour afficher les règles des couleurs
 const displayColorRules = () => {
     console.log("🌈 Règles des couleurs :");
@@ -19,19 +23,27 @@ const displayColorRules = () => {
 
 // Fonction pour demander à l'utilisateur de saisir un mot secret
 const askForSecretWord = () => {
-  rl.question("Joueur 1, entrez un mot secret de 5 lettres : ", (secretWord) => {
-    if (!/^[a-zA-Z]{5}$/.test(secretWord)) {
-      console.log("❌ Le mot doit contenir exactement 5 lettres alphabétiques !");
-      askForSecretWord();  // Repose la question si le mot est invalide
-    } else {
-      console.clear();
-      game = new WordleGame(secretWord.toLowerCase());
-      console.log("✅ Mot secret choisi ! Joueur 2, devinez le mot en 6 tentatives.\n");
-      displayColorRules();
-      askGuess();
-    }
-  });
-};
+    console.log("Voici une liste de mots de 5 lettres parmi lesquels vous pouvez choisir :");
+    availableWords.forEach((word, index) => {
+      console.log(`${index + 1}. ${word}`);
+    });
+  
+    rl.question("Choisissez un mot secret parmi cette liste (numéro de 1 à 20) : ", (choice) => {
+      const selectedWord = availableWords[parseInt(choice) - 1];
+  
+      if (!selectedWord) {
+        console.log("❌ Choix invalide, veuillez choisir un numéro entre 1 et 20.");
+        askForSecretWord();  // Repose la question si le choix est invalide
+      } else {
+        console.clear();
+        game = new WordleGame(selectedWord.toLowerCase());
+        console.log("✅ Mot secret choisi !\n");
+        displayColorRules();  // Affiche les règles des couleurs
+        console.log("Joueur 2, devinez le mot en 6 tentatives.");
+        askGuess();
+      }
+    });
+  };
 
 // Fonction pour afficher les résultats de la tentative avec couleurs
 const displayColoredGuess = (guess, feedback) => {

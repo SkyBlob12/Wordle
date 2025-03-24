@@ -45,9 +45,5 @@ export class WordleGame {
     isGameOver() {
       return this.attempts <= 0 || this.history.some(entry => entry.feedback.every(f => f === "green"));
     }
-    
-    getHistory() {
-      return this.history;
-    }
   }
   
