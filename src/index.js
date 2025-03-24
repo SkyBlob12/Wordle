@@ -28,11 +28,11 @@ const askForSecretWord = () => {
       console.log(`${index + 1}. ${word}`);
     });
   
-    rl.question("Choisissez un mot secret parmi cette liste (numéro de 1 à 20) : ", (choice) => {
+    rl.question("Choisissez un mot secret parmi cette liste (numéro de 1 à 10) : ", (choice) => {
       const selectedWord = availableWords[parseInt(choice) - 1];
   
       if (!selectedWord) {
-        console.log("❌ Choix invalide, veuillez choisir un numéro entre 1 et 20.");
+        console.log("❌ Choix invalide, veuillez choisir un numéro entre 1 et 10.");
         askForSecretWord();  // Repose la question si le choix est invalide
       } else {
         console.clear();
