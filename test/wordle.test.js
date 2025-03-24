@@ -56,4 +56,21 @@ describe("WordleGame", () => {
     const game = new WordleGame("apple");
     expect(() => game.checkGuess("12345")).toThrow("Le mot doit contenir exactement 5 lettres");
   });
+
+  it("doit enregistrer l'historique des tentatives", () => {
+    const game = new WordleGame("apple");
+    game.checkGuess("apply");
+    expect(game.history).toEqual([{ guess: "apply", feedback: ["green", "green", "green", "green", "gray"] }]);
+  });
+  
+  it("doit gérer correctement les lettres répétées", () => {
+    const game = new WordleGame("allee"); 
+    expect(game.checkGuess("elite")).toEqual(["yellow", "green", "gray", "gray", "green"]);
+  });
+
+  it("ne doit pas marquer une lettre comme jaune si elle a déjà été validée en vert", () => {
+    const game = new WordleGame("piano");
+    expect(game.checkGuess("papas")).toEqual(["green", "yellow", "gray", "gray", "gray"]);
+  });
+  
 });

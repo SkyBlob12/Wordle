@@ -1,6 +1,6 @@
 import readline from "readline";
 import colors from "ansi-colors";
-import { WordleGame } from "./wordle.js"; // Import de la logique de jeu
+import { WordleGame } from "./wordle.js";
 
 const rl = readline.createInterface({
   input: process.stdin,
