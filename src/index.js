@@ -105,7 +105,8 @@ const askGuess = () => {
 
 displayRemainingAttempts();  // Affiche les tentatives restantes avant chaque essai
 
-  rl.question("Entrez un mot de 5 lettres : ", (guess) => {
+  // Demande à l'utilisateur de saisir un mot de 5 lettres
+  rl.question("🔤 Entrez un mot de 5 lettres :", (guess) => {
     guess = guess.toLowerCase();
     try {
       const feedback = game.checkGuess(guess);
