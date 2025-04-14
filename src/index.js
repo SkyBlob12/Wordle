@@ -10,8 +10,9 @@ const rl = readline.createInterface({
 let game;
 
 // Liste de mots disponibles pour le jeu
-const availableWords = [
-    "chien", "plage", "fleur", "arbre", "piano","louve", "merle", "bison", "lire", "vache"];  
+export const availableWords = [
+  "chien", "plage", "fleur", "arbre", "piano", "louve", "merle", "bison", "lire", "vache"
+];
 
 // Fonction pour afficher les règles des couleurs
 const displayColorRules = () => {
@@ -82,6 +83,22 @@ const askGuess = () => {
         } else {
           displayLossMessage();
         }
+
+        // Affichage de l'historique des tentatives
+        console.log("\n📜 Historique des tentatives :");
+        game.history.forEach((entry, index) => {
+          let coloredOutput = "";
+          for (let i = 0; i < 5; i++) {
+            if (entry.feedback[i] === "green") {
+              coloredOutput += colors.green(entry.guess[i]);
+            } else if (entry.feedback[i] === "yellow") {
+              coloredOutput += colors.yellow(entry.guess[i]);
+            } else {
+              coloredOutput += colors.gray(entry.guess[i]);
+            }
+          }
+          console.log(`${index + 1}. ${coloredOutput}`);
+        });
         rl.close();
         return;
       }
