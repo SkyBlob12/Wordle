@@ -59,7 +59,7 @@ Pour lancer les tests unitaires, suivez ces étapes :
     ```bash
     npx vitest
     ```
-3. Afficher le coverage :
+3. Affichez le coverage :
     ```bash
     npm run coverage
     ```
