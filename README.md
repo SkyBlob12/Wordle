@@ -13,7 +13,7 @@ Wordle est un jeu de mots populaire où les joueurs doivent deviner un mot de ci
 
 ## Comment jouer
 
-1. Le premier joueur choisit un mot de cinq lettres parmis ceux proposés.
+1. Le premier joueur choisit un mot de cinq lettres.
 2. Le second joueur utilise les indices de couleur pour affiner ses prochaines tentatives.
 3. Répétez jusqu'à ce que vous trouviez le mot correct ou que vous épuisiez vos six tentatives.
 
