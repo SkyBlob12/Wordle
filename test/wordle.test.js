@@ -47,16 +47,6 @@ describe("WordleGame", () => {
     expect(game.isGameOver()).toBe(true);
   });
 
-  it("doit lever une erreur si le mot ne fait pas 5 lettres", () => {
-    const game = new WordleGame("apple");
-    expect(() => game.checkGuess("abc")).toThrow("Le mot doit contenir exactement 5 lettres");
-  });
-
-  it("doit lever une erreur si le mot contient des caractères non alphabétiques", () => {
-    const game = new WordleGame("apple");
-    expect(() => game.checkGuess("12345")).toThrow("Le mot doit contenir exactement 5 lettres");
-  });
-
   it("doit enregistrer l'historique des tentatives", () => {
     const game = new WordleGame("apple");
     game.checkGuess("apply");

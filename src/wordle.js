@@ -1,5 +1,6 @@
 import { dictionary } from "./Dictionary.js";
 
+// Liste des mots disponibles dans le dictionnaire
 const availableWords = dictionary.map(word => word.toLowerCase());
 
 export class WordleGame {
@@ -14,18 +15,9 @@ export class WordleGame {
       this.history = [];
     }
   
-    // Fonction pour valider le mot proposé par l'utilisateur
-    // Le mot doit contenir exactement 5 lettres
-    validateGuess(guess) {
-      return /^[a-zA-Z]{5}$/.test(guess);
-    }
-  
     // Fonction pour vérifier le mot proposé par l'utilisateur
     // Elle compare le mot proposé avec le mot secret et renvoie un tableau de feedback
     checkGuess(guess) {
-      if (!this.validateGuess(guess)) {
-        throw new Error("Le mot doit contenir exactement 5 lettres");
-      }
       guess = guess.toLowerCase();
       let feedback = Array(5).fill("gray");
       let secretArray = this.secretWord.split("");

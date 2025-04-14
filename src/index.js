@@ -8,6 +8,7 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
+// Liste des mots disponibles dans le dictionnaire
 const availableWords = dictionary.map(word => word.toLowerCase());
 
 let game;
@@ -22,8 +23,6 @@ const displayColorRules = () => {
 
 // Fonction pour demander à l'utilisateur de saisir un mot secret
 const askForSecretWord = () => {
-  console.log("Entrez un mot secret de 5 lettres :");
-
   rl.question("🔤 Choisissez un mot secret : ", (inputWord) => {
     const word = inputWord.toLowerCase();
 
@@ -32,12 +31,12 @@ const askForSecretWord = () => {
       console.clear();
       game = new WordleGame(word);
       console.log("✅ Mot secret choisi !\n");
-      displayColorRules();  // Affiche les règles des couleurs
+      displayColorRules();
       console.log("Joueur 2, devinez le mot en 6 tentatives.");
       askGuess();
     } else {
       console.log("❌ Mot invalide, veuillez entrer un mot de 5 lettres qui se trouve dans le dictionnaire.");
-      askForSecretWord();  // Repose la question si le mot est invalide
+      askForSecretWord();
     }
   });
 };
@@ -63,10 +62,12 @@ const displayRemainingAttempts = () => {
   console.log(`⏳ Tentatives restantes : ${game.attempts}`);
 };
 
+// Fonction pour afficher le message de victoire
 const displayWinMessage = () => {
     console.log(`🎉 Félicitations ! Vous avez trouvé le mot "${game.secretWord}" en ${6 - game.attempts} tentatives !`);
   };
-  
+
+// Fonction pour afficher le message de défaite
 const displayLossMessage = () => {
     console.log(`😔 Vous avez épuisé toutes vos tentatives. Le mot secret était "${game.secretWord}".`);
   };
