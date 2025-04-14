@@ -1,18 +1,16 @@
 import readline from "readline";
 import colors from "ansi-colors";
 import { WordleGame } from "./wordle.js";
+import { dictionary } from "./Dictionary.js";
 
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
 
-let game;
+const availableWords = dictionary.map(word => word.toLowerCase());
 
-// Liste de mots disponibles pour le jeu
-export const availableWords = [
-  "chien", "plage", "fleur", "arbre", "piano", "louve", "merle", "bison", "lire", "vache"
-];
+let game;
 
 // Fonction pour afficher les règles des couleurs
 const displayColorRules = () => {
@@ -24,27 +22,25 @@ const displayColorRules = () => {
 
 // Fonction pour demander à l'utilisateur de saisir un mot secret
 const askForSecretWord = () => {
-    console.log("Voici une liste de mots de 5 lettres parmi lesquels vous pouvez choisir :");
-    availableWords.forEach((word, index) => {
-      console.log(`${index + 1}. ${word}`);
-    });
-  
-    rl.question("Choisissez un mot secret parmi cette liste (numéro de 1 à 10) : ", (choice) => {
-      const selectedWord = availableWords[parseInt(choice) - 1];
-  
-      if (!selectedWord) {
-        console.log("❌ Choix invalide, veuillez choisir un numéro entre 1 et 10.");
-        askForSecretWord();  // Repose la question si le choix est invalide
-      } else {
-        console.clear();
-        game = new WordleGame(selectedWord.toLowerCase());
-        console.log("✅ Mot secret choisi !\n");
-        displayColorRules();  // Affiche les règles des couleurs
-        console.log("Joueur 2, devinez le mot en 6 tentatives.");
-        askGuess();
-      }
-    });
-  };
+  console.log("Entrez un mot secret de 5 lettres :");
+
+  rl.question("🔤 Choisissez un mot secret : ", (inputWord) => {
+    const word = inputWord.toLowerCase();
+
+    // Vérifie si le mot est valide (présent dans le dictionnaire)
+    if (availableWords.includes(word)) {
+      console.clear();
+      game = new WordleGame(word);
+      console.log("✅ Mot secret choisi !\n");
+      displayColorRules();  // Affiche les règles des couleurs
+      console.log("Joueur 2, devinez le mot en 6 tentatives.");
+      askGuess();
+    } else {
+      console.log("❌ Mot invalide, veuillez entrer un mot de 5 lettres qui se trouve dans le dictionnaire.");
+      askForSecretWord();  // Repose la question si le mot est invalide
+    }
+  });
+};
 
 // Fonction pour afficher les résultats de la tentative avec couleurs
 const displayColoredGuess = (guess, feedback) => {
@@ -106,7 +102,7 @@ const askGuess = () => {
 displayRemainingAttempts();  // Affiche les tentatives restantes avant chaque essai
 
   // Demande à l'utilisateur de saisir un mot de 5 lettres
-  rl.question("🔤 Entrez un mot de 5 lettres :", (guess) => {
+  rl.question("🔤 Entrez un mot de 5 lettres : ", (guess) => {
     guess = guess.toLowerCase();
     try {
       const feedback = game.checkGuess(guess);

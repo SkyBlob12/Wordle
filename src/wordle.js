@@ -1,4 +1,6 @@
-import { availableWords } from './index.js';
+import { dictionary } from "./Dictionary.js";
+
+const availableWords = dictionary.map(word => word.toLowerCase());
 
 export class WordleGame {
     constructor(secretWord) {
